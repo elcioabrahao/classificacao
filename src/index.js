@@ -14,6 +14,8 @@ const funcoes = {
         axios.post('http://localhost:10000/eventos', {
             tipo: "ObservacaoClassificada",
             dados: observacao,
+        }).catch((err) => {
+            console.log("err", err);
         });
     },
 };
@@ -22,7 +24,9 @@ app.post('/eventos', (req, res) => {
     try {
         funcoes[req.body.tipo](req.body.dados);
     } catch (err) {}
-    res.status(200).send({ msg: "ok" });
+    res.status(200).send({
+        msg: "ok"
+    });
 });
 
 app.listen(7000, () => console.log("Classificação. Porta 7000"));
